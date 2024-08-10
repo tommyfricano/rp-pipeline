@@ -40,7 +40,7 @@ jobs:
         run: pip install requests  # If your script uses any Python packages
 
       - name: List files in GitHub Actions directory
-        run: ls -la .github/workflows
+        run: ls -la .github/scripts
 
       - name: Ensure script is executable
         run: chmod +x scripts/upload_to_confluence.py
