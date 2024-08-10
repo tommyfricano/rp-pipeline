@@ -30,7 +30,7 @@ payload = {
 response = requests.put(
     f"{CONFLUENCE_URL}/{CONFLUENCE_PAGE_ID}",
     json=payload,
-    auth=HTTPBasicAuth(CONFLUENCE_USERNAME, CONFLUENCE_API_TOKEN),
+    auth=HTTPBasicAuth(CONFLUENCE_API_TOKEN),
     headers={"Content-Type": "application/json"},
 )
 
