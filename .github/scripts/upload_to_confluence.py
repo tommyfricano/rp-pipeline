@@ -30,8 +30,8 @@ payload = {
 response = requests.put(
     f"{CONFLUENCE_URL}/{CONFLUENCE_PAGE_ID}",
     json=payload,
-    auth=HTTPBasicAuth(CONFLUENCE_API_TOKEN),
-    headers={"Content-Type": "application/json"},
+    headers={"Content-Type": "application/json",
+             "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
 )
 
 # Check if the upload was successful
