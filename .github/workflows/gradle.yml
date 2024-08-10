@@ -29,3 +29,19 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build
+
+          # Set up Python to run the script
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.0'  # Use the specific version of Python you need
+
+      - name: Install dependencies (if any)
+        run: pip install requests  # If your script uses any Python packages
+
+
+      - name: Upload README to Confluence
+        run: python upload_to_confluence.py
+        env:
+          CONFLUENCE_USERNAME: tjfricano@gmail.com
+          CONFLUENCE_API_TOKEN: ATCTT3xFfGN0QScrFZMBi60zTBmz80In2LtlxPm33JlPKF0KScDcviSMks-tbvLwFx5gndG5lXd-NScfWH5L8xhsSeSQ94HlW2BPuKl6JwaGtFyj37v6TKj8E8NfWrXg17A88RJfOE1n4kU6ZvC9lnsmWksQN71qtp5L6lGXXl1grWRq5EdK-qU=B3A5B863
