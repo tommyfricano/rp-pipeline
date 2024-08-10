@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies (if any)
         run: pip install requests  # If your script uses any Python packages
 
+      - name: List files in GitHub Actions directory
+        run: ls -la .github
+
       - name: List files
         run: ls -la
 
