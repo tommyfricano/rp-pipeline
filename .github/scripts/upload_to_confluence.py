@@ -23,6 +23,8 @@ get_response = requests.get(
              "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
 )
 
+print(get_response)
+
 response = ""
 
 if get_response.status_code == 404:
@@ -44,8 +46,8 @@ if get_response.status_code == 404:
                  "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
     )
 else:
-    page_id = response.json().get("results", [])[0]["id"]
-    print(page_id)
+#     page_id = response.json().get("results", [])[0]["id"]
+#     print(page_id)
     payload = {
         "version": {"number": 2},
         "title": "{CONFLUENCE_PAGE_TITLE}/page_id",
