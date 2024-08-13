@@ -10,8 +10,7 @@ CONFLUENCE_USERNAME = os.environ.get("CONFLUENCE_USERNAME")
 CONFLUENCE_API_TOKEN = os.environ.get("CONFLUENCE_API_TOKEN")
 
 with open("README.md", "r") as file:
-    readme_content = file.read()
-
+    readme_lines = file.readlines()
 
 table_rows = "".join(f"<tr><td><pre>{line}</pre></td></tr>" for line in readme_lines)
 
