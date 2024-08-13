@@ -6,6 +6,7 @@ from requests.auth import HTTPBasicAuth
 
 CONFLUENCE_URL = os.environ.get("CONFLUENCE_URL")
 CONFLUENCE_PAGE_ID = os.environ.get("CONFLUENCE_PAGE_ID")
+CONFLUENCE_PAGE_TITLE = os.environ.get("CONFLUENCE_PAGE_TITLE")
 CONFLUENCE_USERNAME = os.environ.get("CONFLUENCE_USERNAME")
 CONFLUENCE_API_TOKEN = os.environ.get("CONFLUENCE_API_TOKEN")
 
@@ -14,7 +15,6 @@ with open("README.md", "r") as file:
 
 table_rows = "".join(f"<tr><td><pre>{line}</pre></td></tr>" for line in readme_lines)
 
- # Create the full table HTML
 table_html = f"""
  <table>
      <tr>
@@ -24,10 +24,9 @@ table_html = f"""
  </table>
  """
 
- # Create the payload with the table
 payload = {
-     "version": {"number": 3},  # Increment this number for each update
-     "title": "{CONFLUENCE_PAGE_TITLE}",
+     "version": {"number": 4},
+     "title": f"{CONFLUENCE_PAGE_TITLE}",
      "type": "page",
      "body": {
          "storage": {
@@ -36,17 +35,7 @@ payload = {
          }
      },
 }
-#     payload = {
-#         "version": {"number": 2},
-#         "title": "{CONFLUENCE_PAGE_TITLE}",
-#          "type": "page",
-#          "body": {
-#             "storage": {
-#                 "value": f"<pre>{readme_content}</pre>",
-#                 "representation": "storage",
-#             }
-#          },
-#     }
+
 response = requests.put(
     f"{CONFLUENCE_URL}/{CONFLUENCE_PAGE_ID}",
     json=payload,
