@@ -1,6 +1,7 @@
 import os
 import requests
 import random
+import json
 from requests.auth import HTTPBasicAuth
 
 # Confluence credentials and page information
@@ -14,8 +15,7 @@ CONFLUENCE_API_TOKEN = os.environ.get("CONFLUENCE_API_TOKEN")
 with open("README.md", "r") as file:
     readme_content = file.read()
 
-print(CONFLUENCE_URL)
-print(CONFLUENCE_USERNAME)
+print(readme_content)
 
 get_response = requests.get(
     f"{CONFLUENCE_URL}?title={CONFLUENCE_PAGE_TITLE}",
@@ -46,11 +46,12 @@ if get_response.status_code == 404:
                  "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
     )
 else:
-#     page_id = response.json().get("results", [])[0]["id"]
-#     print(page_id)
+    json_res = json.loads(get_response.text)
+    page_id = json_res.get("result", [])[0].get("id")
+    print(page_id)
     payload = {
         "version": {"number": 2},
-        "title": "{CONFLUENCE_PAGE_TITLE}/page_id",
+        "title": "{CONFLUENCE_PAGE_TITLE}",
          "type": "page",
          "body": {
             "storage": {
@@ -60,7 +61,7 @@ else:
          },
     }
     response = requests.put(
-        f"{CONFLUENCE_URL}",
+        f"{CONFLUENCE_URL}/"+page_id,
         json=payload,
         headers={"Content-Type": "application/json",
                  "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
