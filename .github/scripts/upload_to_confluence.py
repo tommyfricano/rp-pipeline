@@ -4,50 +4,14 @@ import random
 import json
 from requests.auth import HTTPBasicAuth
 
-# Confluence credentials and page information
 CONFLUENCE_URL = os.environ.get("CONFLUENCE_URL")
-CONFLUENCE_PAGE_TITLE = os.environ.get("CONFLUENCE_PAGE_TITLE")
-CONFLUENCE_NEW_PAGE_ID = str(random.randint(100000, 999999))
+CONFLUENCE_PAGE_ID = os.environ.get("CONFLUENCE_PAGE_ID")
 CONFLUENCE_USERNAME = os.environ.get("CONFLUENCE_USERNAME")
 CONFLUENCE_API_TOKEN = os.environ.get("CONFLUENCE_API_TOKEN")
 
-# Read README.md content
 with open("README.md", "r") as file:
     readme_content = file.read()
 
-get_response = requests.get(
-    f"{CONFLUENCE_URL}?title={CONFLUENCE_PAGE_TITLE}",
-    headers={"Content-Type": "application/json",
-             "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
-)
-
-print(get_response.content)
-
-response = ""
-
-if get_response.status_code == 404:
-    payload = {
-        "version": {"number": 1},
-        "title": "{CONFLUENCE_PAGE_TITLE}",
-         "type": "page",
-         "body": {
-            "storage": {
-                "value": f"<pre>{readme_content}</pre>",
-                "representation": "storage",
-            }
-         },
-    }
-    response = requests.post(
-        f"{CONFLUENCE_URL}",
-        json=payload,
-        headers={"Content-Type": "application/json",
-                 "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
-    )
-else:
-    json_res = json.loads(get_response.text)
-    results = json_res.get("results", [])
-#     page_id = json_res.get("results", [])[0].get("id")
-    print(results)
     payload = {
         "version": {"number": 2},
         "title": "{CONFLUENCE_PAGE_TITLE}",
@@ -60,7 +24,7 @@ else:
          },
     }
     response = requests.put(
-        f"{CONFLUENCE_URL}/"+page_id,
+        f"{CONFLUENCE_URL}/{CONFLUENCE_PAGE_ID}",
         json=payload,
         headers={"Content-Type": "application/json",
                  "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
