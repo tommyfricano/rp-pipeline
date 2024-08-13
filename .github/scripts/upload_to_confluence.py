@@ -23,7 +23,7 @@ get_response = requests.get(
              "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
 )
 
-print(get_response)
+print(get_response.content)
 
 response = ""
 
