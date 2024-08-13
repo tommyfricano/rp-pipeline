@@ -47,8 +47,9 @@ if get_response.status_code == 404:
     )
 else:
     json_res = json.loads(get_response.text)
-    page_id = json_res.get("results", [])[0].get("id")
-    print(page_id)
+    results = json_res.get("results", [])
+#     page_id = json_res.get("results", [])[0].get("id")
+    print(results)
     payload = {
         "version": {"number": 2},
         "title": "{CONFLUENCE_PAGE_TITLE}",
