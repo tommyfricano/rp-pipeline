@@ -15,8 +15,6 @@ CONFLUENCE_API_TOKEN = os.environ.get("CONFLUENCE_API_TOKEN")
 with open("README.md", "r") as file:
     readme_content = file.read()
 
-print(f"{CONFLUENCE_URL}?title={CONFLUENCE_PAGE_TITLE}")
-
 get_response = requests.get(
     f"{CONFLUENCE_URL}?title={CONFLUENCE_PAGE_TITLE}",
     headers={"Content-Type": "application/json",
