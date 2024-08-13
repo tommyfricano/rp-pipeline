@@ -53,12 +53,12 @@ payload = {
 #             }
 #          },
 #     }
-    response = requests.put(
-        f"{CONFLUENCE_URL}/{CONFLUENCE_PAGE_ID}",
-        json=payload,
-        headers={"Content-Type": "application/json",
-                 "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
-    )
+response = requests.put(
+    f"{CONFLUENCE_URL}/{CONFLUENCE_PAGE_ID}",
+    json=payload,
+    headers={"Content-Type": "application/json",
+        "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
+)
 
 
 
