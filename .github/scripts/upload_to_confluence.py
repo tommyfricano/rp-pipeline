@@ -15,7 +15,7 @@ with open("README.md", "r") as file:
     readme_content = file.read()
 
 get_response = requests.get(
-    f"{CONFLUENCE_URL}/?title={CONFLUENCE_PAGE_TITLE}",
+    f"{CONFLUENCE_URL}?title={CONFLUENCE_PAGE_TITLE}",
     headers={"Content-Type": "application/json",
              "Authorization": f"Basic {CONFLUENCE_API_TOKEN}"},
 )
