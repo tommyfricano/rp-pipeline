@@ -16,7 +16,7 @@ with open("README.md", "r") as file:
 table_rows = "".join(f"<tr><td><pre>{line}</pre></td></tr>" for line in readme_lines)
 
  # Create the full table HTML
- table_html = f"""
+table_html = f"""
  <table>
      <tr>
          <th>README Content</th>
@@ -26,7 +26,7 @@ table_rows = "".join(f"<tr><td><pre>{line}</pre></td></tr>" for line in readme_l
  """
 
  # Create the payload with the table
- payload = {
+payload = {
      "version": {"number": 3},  # Increment this number for each update
      "title": "{CONFLUENCE_PAGE_TITLE}",
      "type": "page",
@@ -36,7 +36,7 @@ table_rows = "".join(f"<tr><td><pre>{line}</pre></td></tr>" for line in readme_l
              "representation": "storage",
          }
      },
- }
+}
 #     payload = {
 #         "version": {"number": 2},
 #         "title": "{CONFLUENCE_PAGE_TITLE}",
