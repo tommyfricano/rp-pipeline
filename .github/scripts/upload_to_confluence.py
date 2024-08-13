@@ -47,7 +47,7 @@ if get_response.status_code == 404:
     )
 else:
     json_res = json.loads(get_response.text)
-    page_id = json_res.get("result", [])[0].get("id")
+    page_id = json_res.get("results", [])[0].get("id")
     print(page_id)
     payload = {
         "version": {"number": 2},
