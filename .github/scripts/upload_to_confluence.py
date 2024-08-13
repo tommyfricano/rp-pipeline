@@ -13,35 +13,30 @@ with open("README.md", "r") as file:
     readme_content = file.read()
 
 
-table_html = """
-<table>
-    <tr>
-        <th>Column 1</th>
-        <th>Column 2</th>
-    </tr>
-    <tr>
-        <td>Value 1</td>
-        <td>Value 2</td>
-    </tr>
-    <tr>
-        <td>Value 3</td>
-        <td>Value 4</td>
-    </tr>
-</table>
-"""
+table_rows = "".join(f"<tr><td><pre>{line}</pre></td></tr>" for line in readme_lines)
 
-# Create the payload with the table and the README content
-payload = {
-    "version": {"number": 2},
-    "title": "{CONFLUENCE_PAGE_TITLE}",
-    "type": "page",
-    "body": {
-        "storage": {
-            "value": f"<pre>{readme_content}</pre><br/>{table_html}",
-            "representation": "storage",
-        }
-    },
-}
+ # Create the full table HTML
+ table_html = f"""
+ <table>
+     <tr>
+         <th>README Content</th>
+     </tr>
+     {table_rows}
+ </table>
+ """
+
+ # Create the payload with the table
+ payload = {
+     "version": {"number": 3},  # Increment this number for each update
+     "title": "{CONFLUENCE_PAGE_TITLE}",
+     "type": "page",
+     "body": {
+         "storage": {
+             "value": table_html,
+             "representation": "storage",
+         }
+     },
+ }
 #     payload = {
 #         "version": {"number": 2},
 #         "title": "{CONFLUENCE_PAGE_TITLE}",
